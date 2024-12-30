@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build output
+/dist
+/build
+/.next
+
+# Dependencies
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+
+
+# Test directories
+/coverage
+
+# Vite specific
+.vite
+
+# React Native
+react-native/packager/
