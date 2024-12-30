@@ -7,16 +7,18 @@ function Navbar() {
   const [profilePicture, setProfilePicture] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL;
 
+  // Create a separate variable for the profile picture URL
   const profilePictureUrl = profilePicture ? `${apiUrl}${profilePicture}` : null;
 
   useEffect(() => {
+    // This effect will run whenever the 'user' item in localStorage changes.
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const user = JSON.parse(storedUser);
       setUsername(user.username);
-      setProfilePicture(user.profilePicture);
+      setProfilePicture(user.profilePicture); // Set the profile picture URL
     }
-  }, [localStorage.getItem("user")]);
+  }, [localStorage.getItem("user")]); // Listen for changes in 'user' in localStorage
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -27,26 +29,16 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-purple-700 p-4 shadow-lg">
+    <nav className="bg-green-600 p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link to="/" className="text-yellow-300 text-2xl font-bold">
+        <Link to="/" className="text-white text-2xl font-semibold">
           Blogging Application
         </Link>
 
-        <ul className="flex space-x-6 text-yellow-100">
+        <ul className="flex space-x-6 text-white">
           <li>
             <Link to="/" className="hover:text-yellow-300 transition duration-200">
               Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="hover:text-yellow-300 transition duration-200">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className="hover:text-yellow-300 transition duration-200">
-              Contact
             </Link>
           </li>
 
@@ -70,27 +62,20 @@ function Navbar() {
                   Create Post
                 </Link>
               </li>
-              <li>
-                <Link to="/dashboard" className="hover:text-yellow-300 transition duration-200">
-                  Dashboard
-                </Link>
-              </li>
               <li className="flex items-center">
                 {profilePictureUrl && (
                   <img
-                    src={profilePictureUrl}
+                    src={profilePictureUrl} // Use the variable here for the image source
                     alt="Profile Picture"
-                    className="w-8 h-8 rounded-full border-2 border-yellow-300 mr-2"
+                    className="w-8 h-8 rounded-full mr-2"
                   />
                 )}
-                <span className="text-yellow-200 font-medium">
-                  Welcome, <span className="text-yellow-300">{username}</span>!
-                </span>
+                <span className="text-gray-200 font-medium">Welcome, {username}!</span>
               </li>
               <li>
                 <button
                   onClick={handleLogout}
-                  className="bg-red-500 py-1 px-4 rounded-md text-white hover:bg-red-600 transition duration-200 shadow-md"
+                  className="hover:text-yellow-300 transition duration-200 bg-red-500 py-1 px-4 rounded-md text-white"
                 >
                   Logout
                 </button>
